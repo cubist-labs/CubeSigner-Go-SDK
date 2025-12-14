@@ -1,0 +1,21 @@
+version: "2"
+linters:
+  enable:
+    # in addition to default linters
+    - asasalint
+    - iface
+    - errname
+  
+  exclusions:
+    rules:
+      - path: 'tests/readme_test.go'
+        linters:
+          - errcheck
+  
+  settings:
+    errcheck:
+      exclude-functions:
+        # deferred closers/cleanup
+        - (io.Closer).Close
+        - (*os.File).Close
+        - os.Remove
